@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Acessar Cubo 3D</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(to right, #e0c3fc, #8ec5fc);
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    #qrcode canvas {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      border-radius: 12px;
+      background: white;
+      padding: 10px;
+    }
+
+    p {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #444;
+    }
+
+    .btn {
+      margin-top: 25px;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+      background-color: #4a00e0;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #6200ff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Escaneie para abrir o Cubo 3D</h1>
+  <div id="qrcode"></div>
+  <p>Ou clique abaixo para acessar diretamente:</p>
+  <button class="btn" onclick="location.href='cubo.html'">Ir para o Cubo</button>
+
+  <script>
+    const url = window.location.origin + "/cubo.html";
+    QRCode.toCanvas(document.createElement("canvas"), url, { width: 200 }, function (error, canvas) {
+      if (error) console.error(error);
+      else document.getElementById('qrcode').appendChild(canvas);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cubo Misterioso 3D</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #c9d6ff, #e2e2e2);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #333;
+    }
+
+    .scene {
+      width: 200px;
+      height: 200px;
+      perspective: 800px;
+      margin-bottom: 30px;
+    }
+
+    .cube {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transform: rotateX(-20deg) rotateY(20deg);
+      transition: transform 0.5s ease;
+    }
+
+    .face {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border: 2px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 600;
+      color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+    }
+
+    /* Adicionamos <span> dentro das faces para controlar a posição do número */
+    .face span {
+      display: inline-block;
+    }
+
+    .front  { transform: rotateY(  0deg) translateZ(100px); background: #3399ff; }
+    .front span  { transform: translateY(-10px); }
+
+    .back   { transform: rotateY(180deg) translateZ(100px); background: #bbbbbb; }
+
+    .right  { transform: rotateY( 90deg) translateZ(100px); background: #66cc66; }
+    .right span  { transform: translateY(-8px); }
+
+    .left   { transform: rotateY(-90deg) translateZ(100px); background: #ffff66; color: #333; }
+    .left span   { transform: translateY(12px); }
+
+    .top    { transform: rotateX( 90deg) translateZ(100px); background: #ff9933; }
+    .top span    { transform: translateY(-14px); }
+
+    .bottom { transform: rotateX(-90deg) translateZ(100px); background: #ff6666; }
+    .bottom span { transform: translateY(16px); }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .controls button {
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: 500;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .controls button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h2>Cubo Misterioso 3D</h2>
+  <div class="scene">
+    <div class="cube" id="cube">
+      <div class="face front"><span>10</span></div>
+      <div class="face back"></div>
+      <div class="face right"><span>12</span></div>
+      <div class="face left"><span>11</span></div>
+      <div class="face top"><span>14</span></div>
+      <div class="face bottom"><span>13</span></div>
+    </div>
+  </div>
+  <div class="controls">
+    <button onclick="rotate('x', 90)">Girar X+</button>
+    <button onclick="rotate('x', -90)">Girar X-</button>
+    <button onclick="rotate('y', 90)">Girar Y+</button>
+    <button onclick="rotate('y', -90)">Girar Y-</button>
+  </div>
+
+  <script>
+    let xRotation = -20;
+    let yRotation = 20;
+
+    function rotate(axis, angle) {
+      if (axis === 'x') xRotation += angle;
+      if (axis === 'y') yRotation += angle;
+      document.getElementById('cube').style.transform = `rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
+    }
+  </script>
+</body>
+</html>
